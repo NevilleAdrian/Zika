@@ -1,0 +1,93 @@
+﻿@model IEnumerable<Zika.Models.Freight>
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
+    ViewData["Title"] = "MyFreights";
+    Layout = "~/Views/Manage/_Layout.cshtml";
+    ViewData.AddActivePage(ManageNavPages.Freight);
+    string id = null;
+    if(SignInManager.IsSignedIn(User))
+    {
+        ApplicationUser user = await UserManager.GetUserAsync(User);
+        id = user.Id;
+    }
+}
+<h4>My Freights</h4>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FreightId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FreightFrom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FreightTo)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mass)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FreightSummary)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateDue)
+            </th>
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (id != null)
+        {
+            @foreach (var item in Model.Where(x => x.UserId == id))
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FreightId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FreightFrom)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FreightTo)
+                    </td>
+                    
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Mass)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FreightSummary)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateDue)
+                    </td>
+                    
+                    <td>
+                        @if (item.Amount > 0 && !item.HasPaid)
+                        {
+                            <button class="btn btn-default">Pay online</button>
+                        }
+
+                    </td>
+                </tr>
+            }
+        }
+
+    </tbody>
+</table>

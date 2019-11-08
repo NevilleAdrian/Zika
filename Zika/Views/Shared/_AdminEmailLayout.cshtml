@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Zika Express Logistics</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
+    <!-- include libraries(jQuery, bootstrap) -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+
+    <!-- include summernote css/js -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css" rel="stylesheet">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
+    <link rel="stylesheet" href="~/css/admin.css" />
+</head>
+<body>
+    <div id="throbber" style="display:none; min-height:120px;"></div>
+    <div id="noty-holder"></div>
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" asp-action="Index" asp-controller="Home">
+                    <img src="~/images/finalzel.png" alt="LOGO" />
+                </a>
+            </div>
+            <!-- Top Menu Items -->
+            <ul class="nav navbar-right top-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<b class="fa fa-angle-down"></b></a>
+                    <ul class="dropdown-menu">
+                        @(await Html.PartialAsync("_AdminLoginPartial"))
+                    </ul>
+                </li>
+            </ul>
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                    <li>
+                        <a asp-action="Index" asp-controller="Freights"><i class="fa fa-fw fa-search"></i> FREIGHTS </a>
+
+                    </li>
+                    <li>
+                        <a asp-action="Index" asp-controller="Invoices"><i class="fa fa-fw fa-star"></i>  INVOICES </a>
+
+                    </li>
+                    <li>
+                        <a asp-action="Index" asp-controller="Exchanges"><i class="fa fa-fw fa-user-plus"></i>  EXCHANGE RATE </a>
+                    </li>
+                    <li>
+                        <a asp-action="Index" asp-controller="Pricing"><i class="fa fa-fw fa-paper-plane-o"></i> PRICING </a>
+                    </li>
+                    <li>
+                        <a asp-action="Index" asp-controller="FAQs"><i class="fa fa-fw fa fa-question-circle"></i> FAQS </a>
+                    </li>
+                    <li>
+                        <a asp-action="Index" asp-controller="Teams"><i class="fa fa-fw fa fa-question-circle"></i> TEAM </a>
+                    </li>
+
+                    <li>
+                        <a asp-action="Index" asp-controller="Testimonials"><i class="fa fa-fw fa fa-user"></i> TESTIMONIALS </a>
+                    </li>
+                    <li>
+                        <a asp-action="Index" asp-controller="Users"><i class="fa fa-fw fa fa-user"></i> USERS </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <!-- Page Heading -->
+                <div class="row" id="main">
+                    <div class="col-sm-12 col-md-12 z-mt-80 well" id="content">
+                        @RenderBody()
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div><!-- /#wrapper -->
+    @*<script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.js"></script>
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/xml/xml.min.js"></script>
+            <script type="text/javascript" src="~/js/froala_editor.min.js"></script>
+            <script type="text/javascript" src="~/js/plugins/align.min.js"></script>
+            <script type="text/javascript" src="~/js/plugins/code_beautifier.min.js"></script>
+            <script type="text/javascript" src="~/js/plugins/code_view.min.js"></script>
+            <script type="text/javascript" src="~/js/plugins/draggable.min.js"></script>
+            <script type="text/javascript" src="~/js/plugins/image.min.js"></script>
+            <script type="text/javascript" src="~/js/plugins/image_manager.min.js"></script>
+            <script type="text/javascript" src="~/js/plugins/link.min.js"></script>
+            <script type="text/javascript" src="~/js/plugins/lists.min.js"></script>
+            <script type="text/javascript" src="~/js/plugins/paragraph_format.min.js"></script>
+            <script type="text/javascript" src="~/js/plugins/paragraph_style.min.js"></script>
+            <script type="text/javascript" src="~/js/plugins/table.min.js"></script>
+            <script type="text/javascript" src="~/js/plugins/video.min.js"></script>
+            <script type="text/javascript" src="~/js/plugins/url.min.js"></script>
+            <script type="text/javascript" src="~/js/plugins/entities.min.js"></script>*@
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

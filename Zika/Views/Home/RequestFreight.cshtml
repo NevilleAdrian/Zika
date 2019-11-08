@@ -1,0 +1,89 @@
+﻿@model Zika.ViewModels.RequestFreightViewModel
+@{
+    ViewData["Title"] = "Request Freight";
+}
+
+<div class="container z-pt-80">
+
+    <form class="well form-horizontal">
+
+        <fieldset>
+
+            <!-- Form Name -->
+            <legend class="text-center"><b>Track your freight</b></legend><br>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" asp-for="FreightId"></label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <input asp-for="FreightId" type="text" placeholder="ere32-dfexc-..." class="form-control" />
+                        <span asp-validation-for="FreightId" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" asp-for="Email"></label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                        <input asp-for="Email" placeholder="odogwu@edemede.ng" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <!-- Text input-->
+
+            <div class="form-group">
+                <button type="button" onclick="trackFreight()" class="btn btn-primary z-btn-block">Track <span id="progress" class="glyphicon glyphicon-repeat fast-right-spinner"></span></button>
+            </div> <!-- form-group// -->
+
+        </fieldset>
+    </form>
+    <p id="_resultArea" class="z-result"></p>
+</div>
+
+@section Scripts {
+    <script>
+        function trackFreight() {
+            let freightId = document.getElementById('FreightId').value;
+            let email = document.getElementById('Email').value;
+
+           
+            console.log(freightId);
+            console.log(email);
+			$.ajax({
+                type: 'GET',
+                url: '@Url.Action("TrackResponse", "Freights")' + '?email=' + email + '&id=' + freightId,
+				contentType: false,
+                processData: false,
+                beforeSend: function () {
+                    $('#progress').show();
+                },
+                complete: function () {
+                    $('#progress').hide();
+                },
+                success: function (result) {
+                    console.log(result.data);
+                    var area = document.getElementById("_resultArea");
+                    if (result.data != "") {
+                        area.innerHTML = "<strong>Order Status:" + result.data+"</strong>";
+                        $('#_resultArea').removeClass('z-result');
+                    }
+                    else {
+                        area.innerHTML = "<strong>Order Status: Freight not found</strong>";
+                        $('#_resultArea').removeClass('z-result');
+                    }
+				},
+				error: function () {
+                    var area = document.getElementById("_resultArea");
+                    area.innerHTML = "<strong>An unkmown error occured</strong>";
+                    $('#_resultArea').removeClass('z-result');
+				}
+
+			});
+		}
+    </script>
+}

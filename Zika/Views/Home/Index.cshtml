@@ -1,0 +1,171 @@
+﻿@inject TestimonialRepository _test
+@{
+    ViewData["Title"] = "Home Page";
+    var testimonials = await _test.Items();
+}
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img src="~/images/haulage1.jpg" alt="Visual Studio" class="img-responsive full-width" />
+        </div>
+        <div class="item">
+            <img src="~/images/haulage3.jpg" alt="Package Management" class="img-responsive full-width" />
+        </div>
+        <div class="item">
+            <img src="~/images/zikaLogistics.jpg" alt="Microsoft Azure" class="img-responsive full-width" />
+            @*<div class="carousel-caption" role="option">
+                <p>
+                    Learn how Microsoft's Azure cloud platform allows you to build, deploy, and scale web apps.
+                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525027&clcid=0x409">
+                        Learn More
+                    </a>
+                </p>
+            </div>*@
+        </div>
+    </div>
+    @*<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>*@
+</div>
+<div class="container text-center z-mb-80">
+    <h3 class="col-md-12 z-pb-10 z-pt-10">
+        <strong>WHY USE US?</strong>
+    </h3>
+    <p class="z-pb-10 z-pt-10">ZIKA EXPRESS is 100% capable of hitting your delivery in 7 days<br /><em>"HASSLE FREE"</em></p>
+    
+    <div class="col-md-3">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 z-hover-effect">
+
+            <div class="box-part text-center">
+
+                <i class="z-big-font glyphicon glyphicon-search" aria-hidden="true"></i>
+
+                <div class="title">
+                    <h4>SHOPPING</h4>
+                </div>
+
+                <div class="text max-text-height">
+                    <span>Need to shop online? Seen items on an online store you want 
+                    to buy but don't know how to ship it?
+                    Don't worry, we will help you. Fill out the request freight 
+                    form and we would have your ordr delivered to
+                    you in a week.</span>
+                </div>
+
+                <a asp-action="Create" asp-controller="Freights">Request shopping service</a>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 z-hover-effect">
+
+            <div class="box-part text-center">
+
+                <i class="z-big-font glyphicon glyphicon-plane" aria-hidden="true"></i>
+
+                <div class="title">
+                    <h4>FREIGHT</h4>
+                </div>
+
+                <div class="text max-text-height">
+                    <span>Are you a business owner? We understand that online services means more profit. 
+                    Do you have goods to freight/ship? We can help you bring down your goods and deliver
+                    to your store or location on time.</span>
+                </div>
+
+                <a asp-action="Create" asp-controller="Freights">Request freight service</a>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 z-hover-effect">
+
+            <div class="box-part text-center">
+
+                <i class="z-big-font glyphicon glyphicon-globe" aria-hidden="true"></i>
+
+                <div class="title">
+                    <h4>TRACKING</h4>
+                </div>
+
+                <div class="text max-text-height">
+                    <span>We totally understand how leaving you in the dark about your freight can be.
+                    Our job also is to help you track your freight at every step and notify you about the progress.</span>
+                </div>
+
+                <a asp-action="RequestFreight" asp-controller="Home">Track your freight</a>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 z-hover-effect">
+
+            <div class="box-part text-center">
+
+                <i class="z-big-font glyphicon glyphicon-transfer" aria-hidden="true"></i>
+
+                <div class="title">
+                    <h4>FAST DELIVERY</h4>
+                </div>
+
+                <div class="text max-text-height">
+                    <span>
+                        We are assuring you a fast delivery of your shipment in
+                        <strong>One Week</strong> stress free.
+                    </span>
+                </div>
+
+                <a asp-action="Register" asp-controller="Account">Sign up</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row z-no-margin-both z-mb-80 z-no-padding-left z-no-padding-right z-layer-blue z-pt-80 z-pb-80">
+    <div class="col-md-12 col-lg-12 col-xs-12 text-center z-fs-36 z-text-white">
+        <p>Sign up now to freight your online orders</p>
+        <a asp-action="Register" asp-controller="Account" class="btn btn-default">Sign up here</a>
+    </div>
+</div>
+
+<div class="container z-mb-80">
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+            <h3 class="col-md-12 z-pb-10 z-pt-10 text-center">
+                <strong>Testimonials</strong>
+            </h3>
+            <div class="carousel slide" data-ride="carousel" id="quote-carousel">
+                <!-- Carousel Slides / Quotes -->
+                
+                <div class="carousel-inner text-center">
+                    @foreach (var item in testimonials)
+                    {
+                        <div class="item @(testimonials.IndexOf(item) == 0 ? "active":"")">
+                            <blockquote>
+                                <div class="row">
+                                    <div class="col-sm-8 col-sm-offset-2">
+                                        <p>@item.Response</p>
+                                        <small>@item.Name</small>
+                                    </div>
+                                </div>
+                            </blockquote>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

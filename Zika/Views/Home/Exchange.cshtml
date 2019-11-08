@@ -1,0 +1,35 @@
+﻿@model Zika.Models.Exchange
+@inject ExchangeRepository _exRepo
+@inject PricingRespository _pcRepo
+@{
+    ViewData["Title"] = "Exchange";
+    var modelEx = await _exRepo.Items();
+    var modelPc = await _pcRepo.Items();
+}
+
+<div class="container z-pt-50">
+    <div class="col-md-8 z-no-padding-left z-no-padding-right z-pt-10">
+        <h4>Our Pricing</h4>
+        <p>@Html.Raw(modelPc.FirstOrDefault().PricingInformation)</p>
+    </div>
+    <div class="col-md-4 z-no-padding-left z-no-padding-right z-pt-10">
+        <h4>Daily Exchange Rate</h4>
+        <table class="table table-responsive">
+            <tr>
+                <th>@Html.DisplayNameFor(item => item.Name)</th>
+                <th>@Html.DisplayNameFor(item => item.RateInNaira)</th>
+                <th>@Html.DisplayNameFor(item => item.RateInCedis)</th>
+            </tr>
+            @foreach (var item in modelEx)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.RateInNaira</td>
+                    <td>@item.RateInCedis</td>
+                </tr>
+            }
+        </table>
+        
+    </div>
+</div>
+

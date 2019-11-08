@@ -1,0 +1,28 @@
+﻿@model Zika.Models.Freight
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Create As Admin";
+}
+
+
+    <h3 class="text-center">Call up Freight</h3>
+    <div class="col-md-12 z-no-padding-left z-no-padding-right">
+        <form asp-action="Create" method="get">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FreightId" class="control-label">Select Freight to generate invoice for.</label>
+                <select asp-for="FreightId" class="form-control" asp-items="ViewBag.Freight"></select>
+                <span asp-validation-for="FreightId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Call" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+
+

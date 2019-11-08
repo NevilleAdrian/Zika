@@ -1,0 +1,24 @@
+﻿@model Zika.Models.Pricing
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Delete";
+}
+
+<div>
+    <h4>Pricing</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PricingInformation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PricingInformation)
+        </dd>
+    </dl>
+    
+    <form asp-action="DeleteConfirmed" asp-route-id="@Model.PricingId">
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

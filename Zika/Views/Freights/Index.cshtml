@@ -1,0 +1,86 @@
+﻿@model IEnumerable<Zika.Models.Freight>
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="CreateAsAdmin">Create New</a>
+</p>
+<table class="table table-bordred table-striped">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.FreightFrom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FreightTo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HasPaid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mass)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateDue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User.Email)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.FreightFrom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FreightTo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HasPaid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mass)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateDue)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.User.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.User.Email)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.FreightId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.FreightId }) |
+                @Html.ActionLink("Invoice", "Create", "Invoices", new { FreightId = item.FreightId }) 
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,131 @@
+﻿@model IEnumerable<Zika.Models.ApplicationUser>
+@inject UsersRepository _users
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var email = await _users.Itemsx();
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Upload emails to this system</a>
+</p>
+<table class="table table-bordred table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AddressOne)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Country)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Birthday)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AddressOne)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Birthday)
+            </td>
+
+        </tr>
+        }
+    </tbody>
+</table>
+
+<h4>Other Users that were added</h4>
+@if (email != null)
+{
+    <table class="table table-bordred table-striped">
+        <thead>
+            <tr>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var emailx in email.UserEmails.Split(','))
+            {
+                <tr>
+                    <td>@emailx</td>
+                </tr>
+            }
+            <tr>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = email.EmailId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = email.EmailId })
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}
+else
+{
+    <p>None</p>
+}
+
+<div>
+    <a asp-action="SendEmailToList">Send email to all uploaded emails</a>
+
+</div>
+
+<div>
+    <a asp-action="SendEmailToAll">Send email to all users on the system</a>
+
+</div>
+@if (!string.IsNullOrEmpty(ViewBag.Email.ToString()))
+{
+    if (ViewBag.Email.ToString() == "success")
+    {
+        <div id="snackbar" class="text-success">Email Sent Successfully</div>
+    }
+    else
+    {
+        <div id="snackbar" class="text-danger">Email Sent Successfully</div>
+    }
+}
+
+@section Scripts{
+    <script>
+          var x = document.getElementById("snackbar");
+          x.className = "show";
+          setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    </script>
+}

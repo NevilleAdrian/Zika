@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Zika.Models.Exchange>
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Index";
+}
+
+
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table table-bordred table-striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RateInNaira)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RateInCedis)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RateInNaira)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RateInCedis)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ExchangeId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ExchangeId })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+

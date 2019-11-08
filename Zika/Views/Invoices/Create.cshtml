@@ -1,0 +1,122 @@
+﻿@model Zika.ViewModels.InvoiceViewModel
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Create";
+}
+
+
+@*<div class="container z-pt-50">
+    <div class="col-md-12 z-no-padding-left z-no-padding-right">
+        <h3 class="text-center">Create Invoice</h3>
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Freight.FreightId" class="control-label">Freight ID</label>
+                <input asp-for="Freight.FreightId" type="text" class="form-control" />
+                <span asp-validation-for="Freight.FreightId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+</div>*@
+<form asp-action="Create">
+    <input type="hidden" asp-for="Invoice.DateIssued" value="@DateTime.Now" />
+    <input type="hidden" asp-for="Invoice.FreightId" value="@Model.Freight.FreightId" />
+
+    <div class="row">
+        <div class="col-xs-12">
+
+            <div class="invoice-title">
+                <h2>Invoice</h2><h3 class="pull-right">Freight # @Model.Freight.FreightId</h3>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-xs-6">
+                    <address>
+                        <strong>Billed To:</strong><br>
+                        @Model.Freight.User.LastName, @Model.Freight.User.FirstName<br>
+                        @Model.Freight.FreightTo
+                    </address>
+                </div>
+                <div class="col-xs-6 text-right">
+                    <address>
+                        <strong>Shipped To:</strong><br>
+                        @Model.Freight.User.LastName, @Model.Freight.User.FirstName<br>
+                        @Model.Freight.FreightTo
+                    </address>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                </div>
+                <div class="col-xs-6 text-right">
+                    <address>
+                        <strong>Order Date:</strong><br>
+                        @DateTime.Now.ToShortDateString()<br><br>
+                    </address>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><strong>Order summary</strong></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-condensed no-border">
+                            <thead>
+                                <tr>
+                                    <td><strong>Description</strong></td>
+                                    <td><strong>Mass</strong></td>
+                                    <td><strong>Amount</strong></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr>
+                                    <td>@Model.Freight.FreightSummary</td>
+                                    <td>@Model.Freight.Mass</td>
+                                    <td>@Model.Freight.Amount</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td class="z-mt-30" rowspan="2" colspan="2">
+                                        <textarea placeholder="Extra information" asp-for="Invoice.Extra" cols="100" class="form-control"></textarea>
+                                    </td>
+                                    <td><strong>Total: </strong>@Model.Freight.Amount</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Generate Invoice" class="btn btn-default" />
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

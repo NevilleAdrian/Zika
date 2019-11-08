@@ -1,0 +1,23 @@
+﻿@{ 
+
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container z-pt-80">
+    
+    <div>
+        <h4>Account Settings</h4>
+        <hr />
+        <div class="col-md-3 z-no-padding-left z-no-padding-right">
+            @await Html.PartialAsync("~/Views/Manage/_ManageNav.cshtml")
+        </div>
+        <div class="col-md-9 z-no-padding-left z-no-padding-right">
+            @RenderBody()
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}
+        

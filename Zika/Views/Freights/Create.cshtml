@@ -1,0 +1,163 @@
+﻿@model Zika.Models.Freight
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
+    ViewData["Title"] = "Create";
+    string userId = null;
+    ApplicationUser user = null;
+    @if (SignInManager.IsSignedIn(User))
+    {
+        user = await UserManager.GetUserAsync(User);
+        userId = user.Id;
+    }
+}
+
+<div class="container z-pt-50">
+    <h3>Send your freight to ZIka Express Logistics</h3>
+    <p><strong>Our only charge is the shipping freight charge which includes custom clearing as below.</strong></p>
+    <p>USA - $9 per Kg</p>
+    <p>UK -  £6 per Kg</p>
+
+    <p><strong>Minimum flat freight and clearing charges from 1Kg to 3Kg orders</strong></p>
+    <p>USA - $25 per Kg</p>
+    <p>UK -  £25 per Kg</p>
+
+    <ul class="z-pl-20">
+        <li>Complete the form below and submit to get your USA, UK address to use as delivery address for your orders.</li>
+        <li>We will ship/forward to you when we recieve your orders</li>
+        <li>All freight leaves every Friday to arrive Lagos the next Friday</li>
+        <li>Warehouse is closed Saturdays and Sundays</li>
+        <li>Ensure you send us tracking id once your order is sent to our warehouse</li>
+        <li>
+            Address your order/parcel exactly as indicated and add <em>"-Zika Express"</em> on the same line where you wrote your name.<br />
+            Example: Mathild Kelvin - Zika Express
+        </li>
+        <li>For high value items, ensure you send us an invoice as soon as your order ships to our warehouse</li>
+        <li>There is an extra $35 charge Lithium battery charge on items with baterries. Example cameras, phones and laptop sets</li>
+        <li>Dimensional weight applies to volume shipment/parcels. If your item is bulky, please contact customer service about dimensional weight.</li>
+        <li>Sign up now and experience a hassle free service</li>
+    </ul>
+    @if (string.IsNullOrEmpty(ViewBag.Success.ToString()) || ViewBag.Success.ToString() == "false")
+    {
+        <form class="well form-horizontal" asp-action="Create">
+            <fieldset>
+                <input type="hidden" asp-for="UserId" value="@userId" />
+                <legend class="text-center"><b>Request Freight</b></legend><br>
+                <div class="form-group">
+                    <label class="col-md-4 control-label" asp-for="FreightFrom"></label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                            <select asp-for="FreightFrom" class="form-control selectpicker">
+                                <option>USA</option>
+                                <option>UK</option>
+                            </select>
+                            <span asp-validation-for="FreightFrom" class="text-danger"></span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label" asp-for="FreightTo"></label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
+                            <input asp-for="FreightTo" placeholder="1 Unity Street, Lagos, Nigeria" class="form-control" />
+                            <span asp-validation-for="FreightTo" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button id="_request" type="submit" class="btn btn-primary z-btn-block">Request</button>
+                </div>
+            </fieldset>
+        </form>
+        if (ViewBag.Success.ToString() == "false")
+        {
+            <p class="text-danger text-center">Could not create your order please try again.</p>
+        }
+    }
+
+    else
+    {
+        <p class="text-success text-center">Thank you. Your order has been received.</p>
+
+        <div class="text-center">
+            @if (ViewBag.Address.ToString() == "UK")
+            {
+                <h4>This is the UK warehouse address</h4>
+                <address>
+                    Unit 1, Loughborough Centre<br />
+                    105 Angel Road Brixton<br />
+                    London United Kingdom<br />
+                    Sw9 7PD
+                </address>
+            }
+            else
+            {
+                <h4>This is the USA warehouse address</h4>
+                <address>
+                    Airport Industrial Office Park, Building B6A, <br />
+                    145 Hook Creek Blvd, Valley Stream,<br />
+                    New York<br />
+                    New York 11581<br />
+                    United States<br />
+                    <abbr title="Phone">P:</abbr>
+                    6465132670
+                </address>
+            }
+        </div>
+        
+    }
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+<script>
+    function createFreight() {
+        let form = document.getElementsByTagName('form')[0];
+        var postBody = new FormData();
+
+        for (let i = 0; i < form.length; i++) {
+
+            postBody.append(form[i].name, form[i].value);
+        }
+
+        console.log(freightId);
+        console.log(email);
+		$.ajax({
+            type: 'POST',
+            url: '@Url.Action("Create", "Freights")',
+            data: postBody,
+			contentType: false,
+            processData: false,
+            beforeSend: function () {
+                document.getElementById('_request').innerHTML = "Requesting please wait...";
+            },
+            complete: function () {
+                document.getElementById('_request').innerHTML = "Request";
+            },
+            success: function (result) {
+                console.log(result.data);
+                var area = document.getElementById("_resultArea");
+                if (result.data != "") {
+                    area.innerHTML = "<strong>Order Status:" + result.data+"</strong>";
+                    $('#_resultArea').removeClass('z-result');
+                }
+                else {
+                    area.innerHTML = "<strong>Order Status: Freight not found</strong>";
+                    $('#_resultArea').removeClass('z-result');
+                }
+			},
+			error: function () {
+                var area = document.getElementById("_resultArea");
+                area.innerHTML = "<strong>An unkmown error occured</strong>";
+                $('#_resultArea').removeClass('z-result');
+			}
+
+		});
+	}
+</script>
+}

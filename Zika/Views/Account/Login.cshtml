@@ -1,0 +1,62 @@
+﻿@using System.Collections.Generic
+@using System.Linq
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Authentication
+@model LoginViewModel
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
+    ViewData["Title"] = "Log in";
+}
+
+
+<div class="container z-pt-80">
+
+    <form class="well form-horizontal" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <fieldset>
+
+            <!-- Form Name -->
+            <legend class="text-center"><b>Please log in to use the service</b></legend><br>
+
+            <!-- Text input-->
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" asp-for="Email"></label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                        <input asp-for="Email" placeholder="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" asp-for="Password"></label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <input asp-for="Password" placeholder="password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text input-->
+
+
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary z-btn-block">Log in</button>
+            </div> <!-- form-group// -->
+            <p class="text-center">Don't have an account? <a asp-action="Register" asp-controller="Account" asp-route-returnUrl="@ViewData["ReturnUrl"]">Register</a> </p>
+
+        </fieldset>
+    </form>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

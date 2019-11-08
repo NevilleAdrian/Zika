@@ -1,0 +1,75 @@
+﻿@model Zika.Models.Freight
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Delete";
+}
+<div class="container z-pt-50">
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>Freight</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.FreightId)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.FreightId)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.FreightFrom)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.FreightFrom)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.FreightTo)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.FreightTo)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.HasPaid)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.HasPaid)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Status)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Status)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Amount)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Amount)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Mass)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Mass)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.DateDue)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.DateDue)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.UserId)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.UserId)
+            </dd>
+        </dl>
+
+        <form asp-action="DeleteConfirmed" asp-route-id="@Model.FreightId">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <a asp-action="Index">Back to List</a>
+        </form>
+    </div>
+</div>
+

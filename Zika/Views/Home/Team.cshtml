@@ -1,0 +1,79 @@
+﻿@inject TeamRepository _repo;
+@{
+    ViewData["Title"] = "Team";
+    var model = await _repo.Items();
+}
+<!--Team design from https://bootsnipp.com/snippets/92xNm-->
+<section id="team" class="pb-5 z-pt-80">
+    <div class="container">
+        <h5 class="section-title h1">OUR TEAM</h5>
+        <div class="row">
+            <!-- Team member -->
+            @foreach (var item in model)
+            {
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                        <div class="mainflip">
+                            <div class="frontside">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <p><img class=" img-fluid" src="~/@item.ImageUrl" alt="card image"></p>
+                                        <h4 class="card-title">@item.Name</h4>
+                                        <p class="card-text">@item.Position</p>
+                                        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="backside">
+                                <div class="card">
+                                    <div class="card-body text-center mt-4">
+                                        <h4 class="card-title">@item.Name</h4>
+                                        <p class="card-text">@item.Description</p>
+                                        <ul class="list-inline">
+                                            @if (!string.IsNullOrEmpty(item.Facebook))
+                                            {
+                                                <li class="list-inline-item">
+                                                    <a class="social-icon text-xs-center" target="_blank" href="@item.Facebook">
+                                                        <i class="fa fa-facebook"></i>
+                                                    </a>
+                                                </li>
+                                            }
+
+                                            @if (!string.IsNullOrEmpty(item.Twitter))
+                                            {
+                                                <li class="list-inline-item">
+                                                    <a class="social-icon text-xs-center" target="_blank" href="@item.Twitter">
+                                                        <i class="fa fa-twitter"></i>
+                                                    </a>
+                                                </li>
+                                            }
+                                            @if (!string.IsNullOrEmpty(item.Instagram))
+                                            {
+                                                <li class="list-inline-item">
+                                                    <a class="social-icon text-xs-center" target="_blank" href="@item.Instagram">
+                                                        <i class="fa fa-instagram"></i>
+                                                    </a>
+                                                </li>
+                                            }
+                                            @if (!string.IsNullOrEmpty(item.Skype))
+                                            {
+                                                <li class="list-inline-item">
+                                                    <a class="social-icon text-xs-center" target="_blank" href="@item.Skype">
+                                                        <i class="fa fa-skype"></i>
+                                                    </a>
+                                                </li>
+                                            }
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <!-- ./Team member -->
+
+        </div>
+    </div>
+</section>

@@ -1,0 +1,39 @@
+﻿@model Zika.Models.Exchange
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Exchange</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RateInNaira)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RateInNaira)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RateInCedis)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RateInCedis)
+        </dd>
+    </dl>
+    
+    <form asp-action="DeleteConfirmed" asp-route-id="@Model.ExchangeId">
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

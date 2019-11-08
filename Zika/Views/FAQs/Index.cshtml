@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Zika.Models.FAQ>
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table table-bordred table-striped">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Question)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Answer)
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Question)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Answer)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.FAQId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.FAQId })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

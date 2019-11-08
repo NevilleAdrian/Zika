@@ -1,0 +1,40 @@
+﻿@model Zika.Models.FAQ
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>FAQ</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" asp-route-id="@Model.FAQId">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="FAQId" />
+            <div class="form-group">
+                <label asp-for="Question" class="control-label"></label>
+                <textarea asp-for="Question" class="form-control"></textarea>
+                <span asp-validation-for="Question" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Answer" class="control-label"></label>
+                <textarea asp-for="Answer" class="form-control"></textarea>
+                <span asp-validation-for="Answer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

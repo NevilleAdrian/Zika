@@ -1,0 +1,65 @@
+﻿@model Zika.Models.Freight
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Edit";
+}
+
+    <form asp-action="Edit" asp-route-id="@Model.FreightId" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="FreightId" />
+        <div class="form-group">
+            <label asp-for="FreightFrom" class="control-label"></label>
+            <input asp-for="FreightFrom" class="form-control" />
+            <span asp-validation-for="FreightFrom" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="FreightTo" class="control-label"></label>
+            <input asp-for="FreightTo" class="form-control" />
+            <span asp-validation-for="FreightTo" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <div class="checkbox">
+                <label>
+                    <input asp-for="HasPaid" /> @Html.DisplayNameFor(model => model.HasPaid)
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Status" class="control-label"></label>
+            <select asp-for="Status" class="form-control" asp-items="Html.GetEnumSelectList<Zika.Enum.HaulageStatus>()"></select>
+            <span asp-validation-for="Status" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Amount" class="control-label"></label>
+            <input asp-for="Amount" class="form-control" />
+            <span asp-validation-for="Amount" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Mass" class="control-label"></label>
+            <input asp-for="Mass" class="form-control" />
+            <span asp-validation-for="Mass" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="DateDue" class="control-label"></label>
+            <input asp-for="DateDue" class="form-control" />
+            <span asp-validation-for="DateDue" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="FreightSummary" class="control-label"></label>
+            <textarea asp-for="FreightSummary" rows="6" class="form-control"></textarea>
+            <span asp-validation-for="FreightSummary" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="UserId" class="control-label">User Email</label>
+            <select asp-for="UserId" class="form-control" asp-items="ViewBag.Users"></select>
+            <span asp-validation-for="UserId" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </form>
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+

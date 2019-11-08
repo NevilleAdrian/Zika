@@ -1,0 +1,37 @@
+﻿@inject FAQRepository _repo;
+@{
+    ViewData["Title"] = "FAQ";
+    var model = await _repo.Items();
+}
+
+<div class="container z-pt-80">
+    <div class="col-md-4 z-no-padding-left z-no-padding-right">
+        <img src="~/images/faq.png" class="img-responsive"/>
+    </div>
+    <div class="col-md-8 z-no-padding-left z-no-padding-right">
+        <div class="panel-group" id="faqAccordion">
+            @foreach (var item in model)
+            {
+                <div class="panel panel-default ">
+                    <div class="panel-heading accordion-toggle question-toggle collapsed" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question@(model.IndexOf(item))">
+                        <h4 class="panel-title">
+                            <a href="#" class="ing">@item.Question</a>
+                        </h4>
+                    </div>
+                    <div id="question@(model.IndexOf(item))" class="panel-collapse collapse" style="height: 0px;">
+                        <div class="panel-body">
+                            <h5><span class="label label-primary">Answer</span></h5>
+                            <p>
+                                @Html.Raw(item.Answer)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+        <!--/panel-group-->
+    </div>
+    
+</div>
+

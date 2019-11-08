@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewData["Title"] = "SendEmailToList";
+    Layout = "~/Views/Shared/_AdminEmailLayout.cshtml";
+}
+
+    <h2 class="top-text text-white">Compose mail and send to all emails on the system</h2>
+    <form asp-action="SendEmailToAll" asp-controller="Users" class="text-form">
+        <div class="form-group">
+            <input name="Subject" class="form-control" type="text" required="required" placeholder="Email Subject" />
+        </div>
+        <textarea id="summernote" name="Message"></textarea>
+
+        <div class="form-group">
+            <input type="submit" value="Send" class="btn btn-default" />
+        </div>
+    </form>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts{
+
+<script>
+    $(document).ready(function () {
+        $('#summernote').summernote();
+    });
+</script>
+}

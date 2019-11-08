@@ -1,0 +1,68 @@
+﻿@model Zika.Models.Freight
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "CreateAsAdmin";
+}
+
+    <form class="well form-horizontal" asp-action="CreateAsAdmin">
+        <fieldset>
+            <legend class="text-center"><b>Request Freight</b></legend><br>
+            <div class="form-group">
+                <label class="col-md-4 control-label" asp-for="UserId">User Email</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <select asp-for="UserId" class="form-control selectpicker" asp-items="@ViewBag.Users">
+                            <option> -- Choose from available users -- </option>
+                        </select>
+                        <span asp-validation-for="UserId" class="text-danger"></span>
+                    </div>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label" asp-for="FreightFrom"></label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                        <select asp-for="FreightFrom" class="form-control selectpicker">
+                            <option>USA</option>
+                            <option>UK</option>
+                        </select>
+                        <span asp-validation-for="FreightFrom" class="text-danger"></span>
+                    </div>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label" asp-for="FreightTo"></label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
+                        <input asp-for="FreightTo" placeholder="1 Unity Street, Lagos, Nigeria" class="form-control" />
+                        <span asp-validation-for="FreightTo" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" asp-for="FreightSummary"></label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <textarea asp-for="FreightSummary" rows="6" cols="100" class="form-control"></textarea>
+                        <span asp-validation-for="FreightSummary" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary z-btn-block">Request</button>
+            </div>
+        </fieldset>
+    </form>
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+

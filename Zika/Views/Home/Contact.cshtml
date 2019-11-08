@@ -1,0 +1,121 @@
+﻿@model Zika.ViewModels.ContactViewModel
+@{
+    ViewData["Title"] = "Contact";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8  z-pt-80">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <i class="fa fa-envelope"></i> Contact us
+                </div>
+                <div class="card-body" id="_resultArea">
+                    <form>
+                        <div class="form-group">
+                            <label asp-for="Name">Name</label>
+                            <input type="text" class="form-control" asp-for="Name" aria-describedby="emailHelp" placeholder="Enter name" required>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Email">Email address</label>
+                            <input type="email" class="form-control" asp-for="Email" aria-describedby="emailHelp" placeholder="Enter email" required>
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Message">Message</label>
+                            <textarea class="form-control" asp-for="Message" rows="6" required></textarea>
+                        </div>
+                        <div class="mx-auto">
+                            <button id="_submit" type="button" onclick="contactInfo()" class="btn btn-primary text-right">Submit</button>
+                        </div>
+                    </form>
+                    <p id="_area" class="text-danger z-result">We could not send your message. Please resend</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12 z-pt-80 z-pb-10">
+            <div class="card bg-light mb-3">
+                <div class="card-header bg-success text-white text-uppercase"><i class="fa fa-home"></i> Address</div>
+                <div class="card-body">
+                    <address>
+                        Btzale Lifestyle Mall,<br />
+                        Admiralty Way,<br />
+                        Lekki Phase 1.<br />
+                        <abbr title="Phone">P:</abbr>
+                        <a href="tel:08135016503">0813 5016 503</a>
+                    </address>
+                </div>
+            </div>
+
+            @*<div class="card z-pt-10 bg-light mb-3">
+                <div class="card-header bg-success text-white text-uppercase"><i class="fa fa-home"></i> UK warehouse Address</div>
+                <div class="card-body">
+                    <address>
+                        Unit 1, Loughborough Centre<br />
+                        105 Angel Road Brixton<br />
+                        London United Kingdom<br />
+                        SWP 7PD
+                    </address>
+                </div>
+            </div>
+
+            <div class="card z-pt-10 bg-light mb-3">
+                <div class="card-header bg-success text-white text-uppercase"><i class="fa fa-home"></i> USA warehouse Address</div>
+                <div class="card-body">
+                    <address>
+                        145 Hook Greek Blvd, Valley Stream NY<br />
+                        New York<br />
+                        New York 11580<br />
+                        United States<br />
+                        <abbr title="Phone">P:</abbr>
+                        6465132670
+                    </address>
+                </div>
+            </div>*@
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function contactInfo() {
+            let name = document.getElementById('Name').value;
+            let email = document.getElementById('Email').value;
+            let message = document.getElementById('Message').value;
+
+            message += "\n\nContact Name: " + name;
+            message += "\n\nContact Email: " + email;
+
+            console.log(name);
+            console.log(email);
+            console.log(message);
+			$.ajax({
+                type: 'GET',
+                url: '@Url.Action("ContactResolve", "Home")' + '?email=' + email + '&name=' + name + '&message=' + message,
+				contentType: false,
+                processData: false,
+                beforeSend: function () {
+                    document.getElementById('_submit').innerHTML = "Submitting..."
+                },
+                complete: function () {
+                    document.getElementById('_submit').innerHTML = "Submit"
+                },
+                success: function (result) {
+                    console.log(result.data);
+                    var area = document.getElementById("_resultArea");
+                    if (result.data) {
+                        area.innerHTML = "<p class='text-success'>Your message has been received.</p>";
+                        
+                    }
+                    else {
+                        $('_area').removeClass('z-result');
+                    }
+				},
+				error: function () {
+                    $('#_area').removeClass('z-result');
+				}
+
+			});
+		}
+    </script>
+}

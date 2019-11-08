@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Zika.Models.Invoice>
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="CreateAsAdmin">Create New</a>
+</p>
+<table class="table table-bordred table-striped">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.InvoiceId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateIssued)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Extra)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FreightId)
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.InvoiceId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateIssued)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Extra)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FreightId)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = item.InvoiceId })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
